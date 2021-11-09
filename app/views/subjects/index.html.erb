@@ -1,0 +1,10 @@
+<h1> Welcome to Langua-tutor!</h1>
+<h3> Pick a language below to start finding tutors </h3>
+<ul class="subjects-container">
+    <% @subjects.each do |subject|%>
+        <li>
+            <%= subject.name %>
+        </li>
+        
+    <%end%>
+</ul>
