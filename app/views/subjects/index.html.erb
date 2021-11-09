@@ -1,10 +1,14 @@
 <h1> Welcome to Langua-tutor!</h1>
 <h3> Pick a language below to start finding tutors </h3>
-<ul class="subjects-container">
-    <% @subjects.each do |subject|%>
-        <li>
+<%# <ul class="list-unstyled">
+    
+</ul> %>
+
+<% @subjects.each do |subject|%>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
             <%= subject.name %>
-        </li>
+        </div>
+    </div>
         
-    <%end%>
-</ul>
+<%end%>
