@@ -5,28 +5,3 @@
     margin: 0;
     padding: 0;
 }
-
-h1{
-    font-size: 1.5em;
-    text-align: center;
-    padding: 1rem;
-    margin: 3rem;
-}
-
-.subjects-container{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    list-style: none;
-    margin: 4rem auto;
-    
-    
-    li{
-        padding: 2rem 1rem;
-        width: 30%;
-        border: cadetblue 1px solid;
-        margin: 1rem 0;
-        align-items: center;
-        
-    }
-}

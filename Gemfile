@@ -60,3 +60,5 @@ gem "devise", "~> 4.8"
 gem "rolify", "~> 6.0"
 
 gem "bootstrap", "~> 5.1"
+
+gem "jquery-rails", "~> 4.4"
