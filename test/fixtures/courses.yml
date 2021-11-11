@@ -5,11 +5,11 @@ one:
   teacher: one
   subject: one
   description: MyText
-  price: 9.99
+  price: 1
 
 two:
   name: MyString
   teacher: two
   subject: two
   description: MyText
-  price: 9.99
+  price: 1

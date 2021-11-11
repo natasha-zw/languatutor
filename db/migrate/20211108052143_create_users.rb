@@ -3,8 +3,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :first_name, limit: 20
       t.string :last_name, limit: 20
-      t.bigint :student
-      t.bigint :teacher
 
       t.timestamps
     end

@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  quanity: 1
-  student: one
+  course: one
+  user: one
 
 two:
-  quanity: 1
-  student: two
+  course: two
+  user: two
