@@ -1,4 +1,9 @@
 class Course < ApplicationRecord
+  # validation
+  validates :name, presence: true
+  validates :description, presence: true
+
+  # relations
   belongs_to :tutor, class_name: 'User'
   belongs_to :subject
   has_many :user_courses
