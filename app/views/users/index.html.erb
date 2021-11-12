@@ -4,7 +4,7 @@
 
 <% @users.each do |user| %>
   <% if user.has_role?(:tutor) %>
-    <div class="card" style="width: 25rem;">
+     <div class="card" style="width: 25rem;">
       <div class="card-body">
         <%= cl_image_tag user.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if user.profile_photo.attached? %>
         <p>
@@ -18,9 +18,12 @@
           <%= user.about_me %>
         </p>
         <section> 
-          <%= link_to 'Show', user_path(user.id)%>
-          <%= link_to 'Edit' %>
-          <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if policy(@users).update?%>
+            <%= link_to 'Edit' %>
+            <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% else %>
+            <%= link_to 'Tutor Profile', user_path(user.id)%>
+          <% end %>
         </section>
       </div>
     </div>

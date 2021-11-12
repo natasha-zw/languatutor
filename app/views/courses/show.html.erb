@@ -1,29 +1,38 @@
 <p id="notice"><%= notice %></p>
+<div class="card" style="width: 25rem;">
+  <div class="card-body">
+    <% @user.taught_courses.each do |course| %>
+      <p>
+        <strong>Course Level:</strong>
+        <%= course.name %>
+      </p>
 
-<p>
-  <strong>Course Level:</strong>
-  <%= @course.name %>
-</p>
+      <p>
+        <strong>Tutor:</strong>
+        <%= course.tutor.full_name %>
+      </p>
 
-<p>
-  <strong>Tutor:</strong>
-  <%= @course.tutor.full_name %>
-</p>
+      <p>
+        <strong>Subject:</strong>
+        <%= @subject.name %>
+      </p>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @subject.name %>
-</p>
+      <p>
+        <strong>Description:</strong>
+        <%= "#{course.description} #{@subject.name}" %>
+      </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= "#{@course.description} #{@subject.name}" %>
-</p>
+      <p>
+        <strong>Price:</strong>
+        <%= @course_price %>
+      </p>
+      <%= link_to 'Add to cart'%>
+    <% end %>
 
-<p>
-  <strong>Price:</strong>
-  <%= @course_price %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
+    <% if policy(@course).update? %>
+        <%= link_to 'Edit', edit_course_path(@course) %> 
+    <% end %>
+  </div>
+</div>
+<%= link_to 'View cart'%>
 <%= link_to 'Back', user_path(@course.tutor_id)%>

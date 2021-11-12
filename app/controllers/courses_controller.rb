@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     @subject = Subject.find(@course.subject_id)
+    @user = @course.tutor
   end
 
   # GET /courses/new

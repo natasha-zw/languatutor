@@ -5,10 +5,11 @@
 </ul> %>
 
 <% @subjects.each do |subject|%>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <%= subject.name %>
+    <%= link_to subject_path(subject.id) do %>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <%= subject.name %>
+            </div>
         </div>
-    </div>
-        
+    <% end %>
 <%end%>
