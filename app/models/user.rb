@@ -28,4 +28,5 @@ class User < ApplicationRecord
   has_many :user_courses
   has_many :studied_courses, through: :user_courses, source: :course
   has_many :orders, class_name: 'Order', foreign_key: :student_id
+  has_one_attached :profile_photo
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # resources :orders
   # resources :courses
-  # resources :users
+  resources :users
   root to: "subjects#index"
   get "/test", to: "subjects#test"
   get "/tutors", to: "users#index", as: "tutors"

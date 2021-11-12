@@ -1,24 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+<section> 
+  <%if @user.profile_photo.attached? %>
+    <%= image_tag @user.profile_photo, width: 150 %>
+  <% end %>
+</section>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+<section>
+  <p>
+    <strong>
+      <%= "#{@user.first_name} #{@user.last_name}"%>
+    </strong>
+  </p>
+  <p>
+    <% if @user.has_role?(:tutor) %>
+      Teaches:
+      <ul>
+        <% @user.taught_courses.each do |course|%>
+          <li><%= "#{course.subject.name} "%></li> 
+        <% end %>
+      </ul>
+    <% end %>
+  </p>
+  <p> 
+    Bio:
+  </p>
+  <p> 
+    <%=@user.about_me %>
+  </p>
+</section>
 
-<p>
-  <strong>Student:</strong>
-  <%= @user.student %>
-</p>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @user.teacher %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
