@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course_price
 
   # GET /courses or /courses.json
   def index
@@ -8,6 +9,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
+    @subject = Subject.find(@course.subject_id)
   end
 
   # GET /courses/new
@@ -59,11 +61,14 @@ class CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find_by(tutor_id: params[:tutor_id])
     end
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:name, :teacher_id, :subject_id, :description, :price)
+      params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price)
     end
+    def set_course_price
+      @course_price = sprintf('$%.2f', @course.price/100)
+    end 
 end

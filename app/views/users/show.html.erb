@@ -30,7 +30,8 @@
   </p>
 </section>
 
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user) %>
+<section>
+  <%= link_to 'Edit', edit_user_path(@user) %> 
+  <%= link_to 'Back', tutors_path %>
+</section>
