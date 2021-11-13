@@ -26,7 +26,8 @@
         <strong>Price:</strong>
         <%= @course_price %>
       </p>
-      <%= link_to 'Add to cart'%>
+      <%= link_to "Buy", buy_path(@course.id)%>
+      <%= link_to 'Add to cart', orders_path%>
     <% end %>
 
     <% if policy(@course).update? %>

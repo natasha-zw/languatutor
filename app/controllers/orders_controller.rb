@@ -56,6 +56,43 @@ class OrdersController < ApplicationController
     end
   end
 
+  def buy
+    course = Course.find(params[:id])
+    subject = Subject.find(course.subject_id)
+
+    line_item = {
+      price_data: {
+        currency: 'aud',
+        product_data: {
+          name: "#{course.name} #{subject.name} by #{course.tutor.full_name}"
+        },
+        unit_amount: course.price
+      },
+      quantity: 1
+    }
+
+    session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: [line_item],
+      mode: 'payment',
+      # These placeholder URLs will be replaced in a following step.
+      success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: cancel_url
+    })
+
+    redirect_to session.url
+  end 
+
+  def success
+    session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    if session
+      success_path
+    end 
+  end 
+
+  def cancel
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

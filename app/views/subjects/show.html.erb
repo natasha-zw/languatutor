@@ -1,1 +1,27 @@
-Hello
+<% @users.each do |user| %>
+  <% if user.has_role?(:tutor) && user.taught_courses.find_by(subject_id: @subject.id) == true %>
+     <div class="card" style="width: 25rem;">
+      <div class="card-body">
+        <%= cl_image_tag user.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if user.profile_photo.attached? %>
+        <p>
+          <%= user.first_name %>
+          <%= user.last_name %>
+          <% user.taught_courses.each do |course|%>
+            <%= "#{course.subject.name} "%> 
+          <% end %>
+        </p>
+        <p>
+          <%= user.about_me %>
+        </p>
+        <section> 
+          <% if policy(@users).update?%>
+            <%= link_to 'Edit' %>
+            <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% else %>
+            <%= link_to 'Tutor Profile', user_path(user.id)%>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  <% end %>
+<% end %>

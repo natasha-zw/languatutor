@@ -18,11 +18,10 @@
           <%= user.about_me %>
         </p>
         <section> 
+          <%= link_to 'Tutor Profile', user_path(user.id)%>
           <% if policy(@users).update?%>
             <%= link_to 'Edit' %>
             <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% else %>
-            <%= link_to 'Tutor Profile', user_path(user.id)%>
           <% end %>
         </section>
       </div>
