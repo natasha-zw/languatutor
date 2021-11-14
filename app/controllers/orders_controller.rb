@@ -90,6 +90,7 @@ class OrdersController < ApplicationController
   def success
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     if session
+      @order
       success_path
     end 
   end 
