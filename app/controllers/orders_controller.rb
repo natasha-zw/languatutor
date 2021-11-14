@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :set_course, only: %i[ show edit update destroy buy add_to_order]
+  before_action :set_order, only: %i[show edit update destroy buy add_to_order]
+  before_action :set_course, only: %i[show edit update destroy add_to_order]
 
   # GET /orders or /orders.json
   def index
     @orders = Order.all
+    @courses = current_user.order.courses
   end
 
   # GET /orders/1 or /orders/1.json
@@ -50,26 +51,29 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.destroy
+     
+    @order.courses.find(params[:id]).delete
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
+      format.html { redirect_to orders_url, notice: "Order item was successfully removed." }
       format.json { head :no_content }
     end
   end
 
   def buy
-    subject = Subject.find(course.subject_id)
-
-    line_item = {
-      price_data: {
-      currency: 'aud',
-        product_data: {
-          name: "#{@course.name} #{subject.name} by #{@course.tutor.full_name}"
+    
+    line_item = @order.courses.map do |course|
+      @subject = Subject.find(course.subject_id)
+      {
+        price_data: {
+        currency: 'aud',
+          product_data: {
+            name: "#{course.name} #{@subject.name} by #{course.tutor.full_name}"
+          },
+          unit_amount: course.price
         },
-        unit_amount: course.price
-      },
-      quantity: 1
-    }
+        quantity: 1
+      }
+    end
 
     session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
@@ -94,7 +98,7 @@ class OrdersController < ApplicationController
   end 
 
   def add_to_order
-    current_user.order.courses << @course
+    @order.courses << @course
     tutor = @course.tutor
     redirect_to course_path(tutor.id), notice: "Course Succefully added to cart"
   end
@@ -102,7 +106,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
+      @order = current_user.order
     end
     def set_course
       @course = Course.find(params[:id])

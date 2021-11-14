@@ -20,7 +20,7 @@
             <%= link_to 'My Profile', user_path(current_user)%>
           </li>
           <li class="nav-item">
-            <%= link_to 'Shopping cart'%>
+            <%= link_to 'Shopping cart', orders_path%>
           </li>
           <li class="nav-item">
             <%= link_to 'Logout', destroy_user_session_path, method: 'delete' %>

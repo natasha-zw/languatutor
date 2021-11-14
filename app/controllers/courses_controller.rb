@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy set_course_price]
+  before_action :set_course, only: %i[show edit update destroy set_course_price]
   before_action :set_course_price
 
   # GET /courses or /courses.json
