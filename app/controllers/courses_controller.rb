@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy set_course_price]
   before_action :set_course_price
 
   # GET /courses or /courses.json
@@ -70,6 +70,6 @@ class CoursesController < ApplicationController
       params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price)
     end
     def set_course_price
-      @course_price = sprintf('$%.2f', @course.price/100)
+    @course_price = sprintf('$%.2f', @course.price/100)
     end 
 end

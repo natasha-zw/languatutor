@@ -9,10 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # has_many :user_subjects
-  # has_many :subjects, through: :user_subjects
-  # has_many :studied_subjects, class_name: 'Subject', foreign_key:
-
+ 
   # custom relation to find subjects studied by users that have the role student
   def studied_subjects
     subjects = []
@@ -25,12 +22,15 @@ class User < ApplicationRecord
   
   # relations
   has_many :taught_courses, class_name: 'Course', foreign_key: :tutor_id
-  has_many :user_courses
+  has_many :user_courses, dependent: :destroy
   has_many :studied_courses, through: :user_courses, source: :course
   has_many :orders, class_name: 'Order', foreign_key: :student_id
-  has_one_attached :profile_photo
+  has_one_attached :profile_photo, dependent: :purge_later
 
   def full_name 
     return "#{first_name} #{last_name}" 
   end
+  def order
+    return Order.find_by(student_id: id, complete: false) || Order.create(student_id: id, complete: false)
+  end 
 end

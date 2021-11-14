@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy buy add_to_order]
 
   # GET /orders or /orders.json
   def index
@@ -57,14 +58,13 @@ class OrdersController < ApplicationController
   end
 
   def buy
-    course = Course.find(params[:id])
     subject = Subject.find(course.subject_id)
 
     line_item = {
       price_data: {
-        currency: 'aud',
+      currency: 'aud',
         product_data: {
-          name: "#{course.name} #{subject.name} by #{course.tutor.full_name}"
+          name: "#{@course.name} #{subject.name} by #{@course.tutor.full_name}"
         },
         unit_amount: course.price
       },
@@ -93,11 +93,20 @@ class OrdersController < ApplicationController
   def cancel
   end 
 
+  def add_to_order
+    current_user.order.courses << @course
+    tutor = @course.tutor
+    redirect_to course_path(tutor.id), notice: "Course Succefully added to cart"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
     end
+    def set_course
+      @course = Course.find(params[:id])
+    end 
 
     # Only allow a list of trusted parameters through.
     def order_params
