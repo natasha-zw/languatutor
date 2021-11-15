@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'course_orders/create'
+  get 'course_orders/update'
+  get 'course_orders/destroy'
   devise_for :users
   # resources :orders
   # resources :courses
