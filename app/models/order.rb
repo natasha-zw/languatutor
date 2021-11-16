@@ -13,4 +13,6 @@ class Order < ApplicationRecord
       errors.add(:base, "You have an uncompleted order please check your shopping cart")
     end
   end 
+
+ 
 end

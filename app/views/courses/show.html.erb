@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-<div class="card" style="width: 25rem;">
-  <div class="card-body">
-    <% @user.taught_courses.each do |course| %>
+<% @user.taught_courses.each do |course| %>
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
       <p>
         <strong>Course Level:</strong>
         <%= course.name %>
@@ -14,25 +14,25 @@
 
       <p>
         <strong>Subject:</strong>
-        <%= @subject.name %>
+        <%= course.subject.name %>
       </p>
 
       <p>
         <strong>Description:</strong>
-        <%= "#{course.description} #{@subject.name}" %>
+        <%= "#{course.description} #{course.subject.name}" %>
       </p>
 
       <p>
         <strong>Price:</strong>
-        <%= @course_price %>
+        <%= sprintf('$%2.f', course.price/100) %>
       </p>
-      <%= link_to 'Add to cart', add_to_order_path(@course.id)%>
-    <% end %>
-
-    <% if policy(@course).update? %>
-        <%= link_to 'Edit', edit_course_path(@course) %> 
-    <% end %>
+      <%if current_user.id != course.tutor_id %>
+        <%= link_to 'Add to cart', add_to_order_path(course.id)%>
+      <% else %>
+        <%= link_to 'Edit', edit_course_path(course.id) %> 
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 <%= link_to 'View cart', orders_path%>
 <%= link_to 'Back', user_path(@course.tutor_id)%>

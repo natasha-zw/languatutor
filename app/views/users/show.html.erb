@@ -17,7 +17,7 @@
       Teaches:
       <ul>
         <% @user.taught_courses.each do |course|%>
-          <li><%= link_to "#{course.subject.name}", course_path(@user)%></li> 
+          <li><%= link_to "#{course.subject.name}", subject_path(course.subject.id)%></li> 
         <% end %>
       </ul>
     <% end %>
@@ -32,8 +32,9 @@
 
 <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user) %>
 <section>
-  <% if policy(@user).update? %>
-    <%= link_to 'Edit', edit_user_path(@user) %> 
-  <% end %>
+<% if current_user == @user %>
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> 
+  <%= link_to 'Add Courses', new_course_path%>
+<% end %>
   <%= link_to 'Back', tutors_path %>
 </section>

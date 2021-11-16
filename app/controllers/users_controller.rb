@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_roles, only: %i[ new edit create ]
+  before_action :set_subjects, only: %i[ new edit create ]
   # GET /users or /users.json
   def index
     @users = User.all
@@ -62,9 +64,16 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
+    def set_roles
+      @roles = Role.all
+    end 
+
+    def set_subjects
+      @subjects = Subject.all
+    end 
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :profile_photo, :about_me)
+      params.require(:user).permit(:first_name, :last_name, :profile_photo, :about_me, subject_role_ids: [], subject_ids: [])
     end
 end

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get "/cancel", to: "orders#cancel", as: "cancel"
   get "/add_to_order/:id", to: "orders#add_to_order", as: "add_to_order"
   get "/shopping_cart", to: "orders#index", as: "orders"
+  get "/courses/new", to: "courses#new", as: "new_course"
+  post "/courses", to: "courses#create"
+  patch "/course/:id", to: "courses#update"
   delete "/course/:id", to: "orders#destroy"
 
   

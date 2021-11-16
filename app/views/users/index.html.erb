@@ -3,7 +3,7 @@
 <h1>Tutors</h1>
 
 <% @users.each do |user| %>
-  <% if user.has_role?(:tutor) %>
+  <% if user.has_role?(:tutor) && user.taught_courses.any? %>
      <div class="card" style="width: 25rem;">
       <div class="card-body">
         <%= cl_image_tag user.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if user.profile_photo.attached? %>
@@ -19,8 +19,7 @@
         </p>
         <section> 
           <%= link_to 'Tutor Profile', user_path(user.id)%>
-          <% if policy(@users).update?%>
-            <%= link_to 'Edit' %>
+          <% if policy(@users).destroy?%>
             <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </section>

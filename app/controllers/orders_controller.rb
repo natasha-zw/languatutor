@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
     @courses = current_user.order.courses
+    
   end
 
   # GET /orders/1 or /orders/1.json
@@ -111,9 +112,10 @@ class OrdersController < ApplicationController
     def set_course
       @course = Course.find(params[:id])
     end 
+  
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:quanity, :refernces)
+      params.require(:order).permit(:student_id)
     end
 end

@@ -11,4 +11,7 @@ class Course < ApplicationRecord
   has_many :students, through: :user_courses, source: :user
   has_many :course_orders, dependent: :destroy 
   has_many :orders, through: :course_orders
+
+
+
 end
