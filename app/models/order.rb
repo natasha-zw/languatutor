@@ -12,4 +12,5 @@ class Order < ApplicationRecord
     errors.add(:base, 'You have an uncompleted order please check your shopping cart') if uncompleted_orders.count > 0
   end
 
+
 end

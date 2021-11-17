@@ -1,15 +1,21 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[index show edit update destroy buy add_to_order]
-  before_action :set_course, only: %i[show edit update destroy add_to_order]
+  before_action :set_order, only: %i[index show edit update destroy buy add_to_order success shopping_cart]
+  before_action :set_course, only: %i[ edit update destroy add_to_order]
+  before_action :set_course_orders, only: %i[index shopping_cart]
+  before_action :set_all_orders, only: %i[show]
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
-    @courses = @order.course_orders
+    @orders = current_user.orders.where(completed: true)
   end
+
+  def shopping_cart
+    @orders = Order.all
+  end 
 
   # GET /orders/1 or /orders/1.json
   def show
+    @completed_orders = current_user.completed_orders
   end
 
   # GET /orders/new
@@ -59,6 +65,7 @@ class OrdersController < ApplicationController
     end
   end
 
+  # stripe functionality to buy courses
   def buy
     line_item = @order.courses.map do |course|
       @subject = Subject.find(course.subject_id)
@@ -85,12 +92,14 @@ class OrdersController < ApplicationController
     })
 
     redirect_to session.url
-  end 
+  end
 
   def success
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    if session.persists?
-      success_path
+    @order.update(complete: true)
+    respond_to do |format|
+      format.html { redirect_to @order, notice: "Your order was successful" }
+      format.json { render :show, status: :ok, location: @order }
     end 
   end 
 
@@ -109,16 +118,24 @@ class OrdersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = current_user.order
-    end
-    def set_course
-      @course = Course.find(params[:id])
-    end 
-  
+  def set_order
+    @order = current_user.order
+  end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:student_id)
-    end
+  def set_all_orders
+    @all_orders = current_user.orders
+  end
+
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
+  def set_course_orders
+    @course_orders = @order.course_orders
+  end
+
+  # Only allow a list of trusted parameters through.
+  def order_params
+    params.require(:order).permit(:student_id)
+  end
 end

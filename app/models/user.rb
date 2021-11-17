@@ -43,8 +43,13 @@ class User < ApplicationRecord
   def full_name 
     return "#{first_name} #{last_name}" 
   end
+
   def order
     return Order.find_by(student_id: id, complete: false) || Order.create(student_id: id, complete: false)
+  end
+
+  def completed_orders
+    return Order.where(student_id: id, complete: true)
   end 
 
 end

@@ -12,10 +12,9 @@ class CoursesController < ApplicationController
     @user = @course.tutor
   end
 
-  # GET /courses/new
+  # GET /courses/new 
   def new
     @course = Course.new
-    
   end
 
   # GET /courses/1/edit
@@ -62,19 +61,20 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find_by(tutor_id: params[:tutor_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
 
-    def set_courses_subjects_prices
-      @courses = Course.all
-      @subjects = Subject.all
-      @prices = [2000, 3000, 4000]
-    end 
+  def set_course
+    @course = Course.find_by(tutor_id: params[:tutor_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price)
-    end
+  def set_courses_subjects_prices
+    @courses = Course.all
+    @subjects = Subject.all
+    @prices = [2000, 3000, 4000]
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_params
+    params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price)
+  end
 end

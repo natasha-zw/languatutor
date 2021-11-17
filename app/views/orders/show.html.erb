@@ -1,14 +1,39 @@
 <p id="notice"><%= notice %></p>
+<h1>Your Orders</h1>
 
-<p>
-  <strong>Quanity:</strong>
-  <%= @order.quanity %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Description</th>
+      <th>Tutor</th>
+      <th>Course price </th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Refernces:</strong>
-  <%= @order.refernces %>
-</p>
+  <tbody>
+    <div class="card" >
+      <% @completed_orders.each do |order| %>
+        <div class="card-body">
+          <% order.course_orders.each do |order_item|%>
+            <tr>
+              <td><%= "#{order_item.course.name} #{order_item.course.subject.name}"  %></td>
+              <td><%= order_item.course.description %></td>
+              <td><%= order_item.course.tutor.full_name %></td>
+              <td><%= sprintf('$%.2f', order_item.course.price/100) %></td>
+              <td><%= order_item.quantity%></td>
+              <td><%= sprintf('$%.2f',(order_item.course.price * order_item.quantity)/100) %></td>
+              <td><%= link_to 'View Course', course_path(order_item.course.tutor) %></td>
+            </tr>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </tbody>
+</table>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+
+<%= link_to 'Back', user_path(current_user.id) %>

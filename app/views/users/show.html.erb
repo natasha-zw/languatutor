@@ -35,7 +35,7 @@
 <% if policy(@user).update? || current_user.id == @user.id %>
   <%= link_to 'Edit Profile', edit_user_path(@user) %> 
   <%= link_to 'Add Courses', new_course_path%>
-  <%= link_to 'View Cart', orders_path%>
+  <%= link_to 'View Cart', shopping_cart_path%>
 <% end %>
   <%= link_to 'Back', tutors_path %>
 </section>
