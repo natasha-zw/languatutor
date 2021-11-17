@@ -10,6 +10,7 @@
         <p>
           <%= user.first_name %>
           <%= user.last_name %>
+          <br/>
           <% user.taught_courses.each do |course|%>
             <%= "#{course.subject.name} "%> 
           <% end %>
@@ -20,7 +21,7 @@
         <section> 
           <%= link_to 'Tutor Profile', user_path(user.id)%>
           <% if policy(@users).destroy?%>
-            <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Destroy', user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </section>
       </div>

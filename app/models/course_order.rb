@@ -1,7 +1,7 @@
 class CourseOrder < ApplicationRecord
   belongs_to :course
   belongs_to :order
-  before_save :set_total
+  before_save :total
 
   def price
     if persisted?

@@ -5,10 +5,10 @@ class SubjectsController < ApplicationController
     @subjects = Subject.all
   end
 
-  # GET /orders/1 or /orders/1.json
+  # GET /subject/1 or /subject/1.json shows tutors for specific subject
   def show
+    @tutors = User.includes(:taught_courses)
     @users = User.all
-    # @taught_course = @user.taught_courses.find_by(subject_id: params[:id])
   end
 
  private

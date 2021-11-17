@@ -14,5 +14,9 @@ class Order < ApplicationRecord
     end
   end 
 
+  def course_order
+    return CourseOrder.find_by(order_id: student.order.id)
+  end 
+
  
 end

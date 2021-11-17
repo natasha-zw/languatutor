@@ -1,24 +1,21 @@
-<% @users.each do |user| %>
-  <% if user.has_role?(:tutor) && user.taught_courses.find_by(subject_id: @subject.id) %>
+<% @tutors.each do |tutor| %>
+  <% if tutor.has_role?(:tutor) && tutor.taught_courses.find_by(subject_id: @subject.id) %>
      <div class="card" style="width: 25rem;">
       <div class="card-body">
-        <%= cl_image_tag user.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if user.profile_photo.attached? %>
+        <%= cl_image_tag tutor.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if tutor.profile_photo.attached? %>
         <p>
-          <%= user.full_name %>
+          <%= tutor.full_name %>
           <br/>
-          <% user.taught_courses.each do |course|%>
+          <p> Teaches: </p>
+          <% tutor.taught_courses.each do |course|%>
             <%= "#{course.subject.name} "%> 
           <% end %>
         </p>
         <p>
-          <%= user.about_me %>
+          <%= tutor.about_me %>
         </p>
         <section> 
-          <% if policy(@users).update?%>
-            <%= link_to 'Edit' %>
-            <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-            <%= link_to 'Tutor Profile', user_path(user.id)%>
+          <%= link_to 'Tutor Profile', user_path(tutor.id)%>
         </section>
       </div>
     </div>

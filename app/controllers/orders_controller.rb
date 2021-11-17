@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show edit update destroy buy add_to_order]
+  before_action :set_order, only: %i[index show edit update destroy buy add_to_order]
   before_action :set_course, only: %i[show edit update destroy add_to_order]
 
   # GET /orders or /orders.json
   def index
     @orders = Order.all
-    @courses = current_user.order.courses
-    
+    @courses = @order.courses
+    @course_order = @order.course_order
   end
 
   # GET /orders/1 or /orders/1.json
@@ -61,9 +61,9 @@ class OrdersController < ApplicationController
   end
 
   def buy
-    
     line_item = @order.courses.map do |course|
       @subject = Subject.find(course.subject_id)
+      @course_item = CourseOrder.find_by(course_id: course.id, order_id: @order.id)
       {
         price_data: {
         currency: 'aud',
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
           },
           unit_amount: course.price
         },
-        quantity: 1
+        quantity: @course_item.quantity
       }
     end
 

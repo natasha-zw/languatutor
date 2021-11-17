@@ -19,17 +19,17 @@
 
       <p>
         <strong>Description:</strong>
-        <%= "#{course.description} #{course.subject.name}" %>
+        <%= "#{course.description}" %>
       </p>
 
       <p>
         <strong>Price:</strong>
         <%= sprintf('$%2.f', course.price/100) %>
       </p>
-      <%if current_user.id != course.tutor_id %>
-        <%= link_to 'Add to cart', add_to_order_path(course.id)%>
-      <% else %>
+      <% if current_user.id == course.tutor_id || policy(@user).update? %>
         <%= link_to 'Edit', edit_course_path(course.id) %> 
+      <% else %>
+        <%= link_to 'Add to cart', add_to_order_path(course.id)%>
       <% end %>
     </div>
   </div>
