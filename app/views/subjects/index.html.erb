@@ -1,15 +1,20 @@
-<h1> Welcome to Langua-tutor!</h1>
-<h3> Pick a language below to start finding tutors </h3>
-<%# <ul class="list-unstyled">
-    
-</ul> %>
 
-<% @subjects.each do |subject|%>
-    <%= link_to subject_path(subject.id) do %>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <%= subject.name %>
+<h1> Welcome to Languatutor!</h1>
+
+<h4> Pick a language below to start finding tutors </h3>
+
+<div class="row">
+    <% @subjects.each do |subject|%>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <%= link_to subject_path(subject.id), class: "card-link" do %>
+                        <div class=" bd-highlight text-center m-2" style="width: 18rem; height: 5rem">
+                        <%= subject.name %>
+                        </div>
+                    <% end %>
+                </div>
             </div>
         </div>
-    <% end %>
-<%end%>
+    <%end%>
+</div>

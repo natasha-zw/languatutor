@@ -12,7 +12,4 @@ class Order < ApplicationRecord
     errors.add(:base, 'You have an uncompleted order please check your shopping cart') if uncompleted_orders.count > 0
   end
 
-  # def course_order
-  #   return CourseOrder.find_by(order_id: student.order.id)
-  # end
 end
