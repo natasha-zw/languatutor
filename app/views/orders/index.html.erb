@@ -16,31 +16,32 @@
   </thead>
 
   <tbody>
-    <% @courses.each do |course| %>
+    <% @courses.each do |course_order| %>
+    <% course = course_order.course %>
       <tr>
         <td><%= "#{course.name} #{course.subject.name}"  %></td>
         <td><%= course.description %></td>
         <td><%= course.tutor.full_name %></td>
-        <td><%= sprintf('$%.2f',(course.price* @course_order.quantity)/100) %></td>
+        <td><%= sprintf('$%.2f',(course.price * course_order.quantity)/100) %></td>
         <td><%= sprintf('$%.2f',course.price/100) %></td>
         <td>
           <%= form_with method: :put, local: false, url: course_orders_update_path do |f| %>
-            <%= f.hidden_field :course_id,  value: @course_order.id%>
-            <%= f.number_field :quantity, in: 1..5,  value: @course_order.quantity%>
+            <%= f.hidden_field :course_id,  value: course.id%>
+            <%= f.number_field :quantity, in: 1..5,  value: course_order.quantity %>
             <%= f.submit "Update Quantity"%>
           <% end %>
-          </td>
-          
+        </td>
         <td><%= link_to 'View Course', course_path(course.tutor) %></td>
-        <td><%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', destroy_course_order_path(course.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
-<p>total: 
+<p>total:
 </p>
 <br>
 
-<%= link_to 'My profile', user_path(current_user.id)%>
+<%= link_to 'My Profile', user_path(current_user.id)%>
 <%= link_to 'Checkout', buy_path %>
 

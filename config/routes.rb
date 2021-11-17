@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'course_orders/create'
-  put 'course_orders/update', to: 'course_orders#update'
-  get 'course_orders/destroy'
   devise_for :users
   # resources :orders
   # resources :courses
@@ -21,6 +18,9 @@ Rails.application.routes.draw do
   post '/courses', to: 'courses#create'
   patch '/course/:id', to: 'courses#update'
   delete '/course/:id', to: 'orders#destroy'
-
+  get '/course_orders/create'
+  put '/course_orders/update', to: 'course_orders#update', as: 'course_orders_update'
+  delete '/course_order/:course_id/destroy', to: 'course_orders#destroy', as: 'destroy_course_order'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

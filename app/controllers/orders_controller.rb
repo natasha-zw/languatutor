@@ -5,8 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = Order.all
-    @courses = @order.courses
-    @course_order = @order.course_order
+    @courses = @order.course_orders
   end
 
   # GET /orders/1 or /orders/1.json
@@ -55,7 +54,7 @@ class OrdersController < ApplicationController
      
     @order.courses.find(params[:id]).delete
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order item was successfully removed." }
+      format.html { redirect_to orders_url, notice: "Shopping cart was successfully removed." }
       format.json { head :no_content }
     end
   end
@@ -90,12 +89,16 @@ class OrdersController < ApplicationController
 
   def success
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    if session
+    if session.persists?
       success_path
     end 
   end 
 
   def cancel
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user.id), notice: "Your order was cancelled!" }
+      format.json { render :show, status: :ok, location: current_user }
+    end
   end 
 
   def add_to_order
