@@ -65,7 +65,8 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
     def set_roles
-      @roles = Role.all
+      @roles = Role.all 
+      @signup_roles = Role.where.no(name: "admin")
     end 
 
     def set_subjects
