@@ -32,6 +32,9 @@ tutors.each do |tutor|
     tutor.add_role(:tutor)
 end 
 
+student.first.profile_photo.attach(io: File.open('./public/pr
+  ofile_images/student_1.jpg'), filename: 'student_1.jpg')
+
 Course.create([
                 {name: 'Beginner', description: 'Beginner level course for subject', price: 2000, subject_id: Subject.first.id, tutor_id: tutors.first.id },
                 {name: 'Intermediate', description: 'Intermediate level course for subject', price: 3000, subject_id: Subject.find(2).id, tutor_id: tutors.second.id },

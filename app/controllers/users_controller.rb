@@ -38,7 +38,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    authorize @user
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "User was successfully updated." }
@@ -66,7 +65,7 @@ class UsersController < ApplicationController
     end
     def set_roles
       @roles = Role.all 
-      @signup_roles = Role.where.no(name: "admin")
+      @signup_roles = Role.where.not(name: "admin")
     end 
 
     def set_subjects

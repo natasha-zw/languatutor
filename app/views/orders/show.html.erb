@@ -19,14 +19,15 @@
       <% @completed_orders.each do |order| %>
         <div class="card-body">
           <% order.course_orders.each do |order_item|%>
+            <%course = order_item.course%>
             <tr>
-              <td><%= "#{order_item.course.name} #{order_item.course.subject.name}"  %></td>
-              <td><%= order_item.course.description %></td>
-              <td><%= order_item.course.tutor.full_name %></td>
-              <td><%= sprintf('$%.2f', order_item.course.price/100) %></td>
+              <td><%= "#{course.name} #{course.subject.name}"  %></td>
+              <td><%= course.description %></td>
+              <td><%= link_to "#{course.tutor.full_name}", user_path(course.tutor.id), class: "text-decoration-none" %></td>
+              <td><%= sprintf('$%.2f', course.price/100) %></td>
               <td><%= order_item.quantity%></td>
-              <td><%= sprintf('$%.2f',(order_item.course.price * order_item.quantity)/100) %></td>
-              <td><%= link_to 'View Course', course_path(order_item.course.tutor) %></td>
+              <td><%= sprintf('$%.2f',(course.price * order_item.quantity)/100) %></td>
+              <td><%= link_to 'View Course', course_path(course.tutor), class: "btn btn-outline-primary text-decoration-none" %></td>
             </tr>
           <% end %>
         </div>
@@ -36,4 +37,4 @@
 </table>
 
 
-<%= link_to 'Back', user_path(current_user.id) %>
+<%= link_to 'Back', user_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>

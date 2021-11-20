@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<section> 
+<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;"> 
   <%if @user.profile_photo.attached? %>
-    <%= image_tag @user.profile_photo, width: 150 %>
+    <%= image_tag @user.profile_photo, width: 150, class: "shadow-lg mb-5 bg-body rounded-3 " %>
   <% end %>
 </section>
 
-<section>
+<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
   <p>
     <strong>
       <%= "#{@user.first_name} #{@user.last_name}"%>
@@ -29,13 +29,16 @@
     <%=@user.about_me %>
   </p>
 </section>
-
-<%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user) %>
-<section>
-<% if policy(@user).update? || current_user.id == @user.id %>
-  <%= link_to 'Edit Profile', edit_user_path(@user) %> 
-  <%= link_to 'Add Courses', new_course_path%>
-  <%= link_to 'View Cart', shopping_cart_path%>
-<% end %>
-  <%= link_to 'Back', tutors_path %>
+<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
+  <% if current_user.has_role?(:tutor) %>
+    <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
+    <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
+  <% elsif current_user.has_role?(:student) %>
+    <%= link_to 'View Orders', order_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
+    <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
+  <% end %>
+  <% if policy(@user).update? || current_user.id == @user.id %>
+    <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
+  <% end %>
+  <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
 </section>
