@@ -8,25 +8,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
- 
-  # custom relation to find subjects studied by users that have the role student
-  def studied_subjects
-    subjects = []
-    UserSubject.where(user_id: id, role_id: Role.find_by(name: 'student').id).each do |user_subject|
-      sub = Subject.find(user_subject.subject_id)
-      subjects.push(sub)
-    end
-    subjects
-  end
 
-  def taught_subjects
-    subjects = []
-    UserSubject.where(user_id: id, role_id: Role.find_by(name: 'tutor').id).each do |user_subject|
-      sub = Subject.find(user_subject.subject_id)
-      subjects.push(sub)
-    end
-    subjects
-  end
 
   # relations
   has_many :taught_courses, class_name: 'Course', foreign_key: :tutor_id, dependent: :destroy

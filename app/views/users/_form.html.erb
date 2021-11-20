@@ -34,9 +34,14 @@
     <br>
     <%= form.collection_check_boxes :role_ids, @signup_roles , :id, :name%>
   </div>
+  <div class="field">
+    <%= form.label :subjects, "Pick which subjects you're interested in" %>
+    <br>
+    <%= form.collection_check_boxes :subject_ids, @subjects, :id, :name%>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"actions btn btn-outline-success" %>
   </div>
   
   
