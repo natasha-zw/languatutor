@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = current_user.orders.where(completed: true)
+    @completed_orders = current_user.completed_orders
   end
 
   def shopping_cart
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
-    @completed_orders = current_user.completed_orders
+    
   end
 
   # GET /orders/new
@@ -95,6 +95,7 @@ class OrdersController < ApplicationController
   end
 
   def success
+    @order.skip_validations = true
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @order.update(complete: true)
     respond_to do |format|

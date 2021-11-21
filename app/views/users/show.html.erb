@@ -1,52 +1,55 @@
+<div class="card mx-auto shadow-lg p-3 mb-5 bg-body rounded" style="min-width: 20rem; max-width: 35rem;">
+  <div class="card-content">
+    <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;"> 
+      <%if @user.profile_photo.attached? %>
+        <%= image_tag @user.profile_photo, width: 150, class: "shadow-lg mb-5 bg-body rounded-3 " %>
+      <% end %>
+    </section>
 
-<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;"> 
-  <%if @user.profile_photo.attached? %>
-    <%= image_tag @user.profile_photo, width: 150, class: "shadow-lg mb-5 bg-body rounded-3 " %>
-  <% end %>
-</section>
-
-<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
-  <h3>Name: </h3>
-  <p>
-    <strong>
-      <%= "#{@user.first_name} #{@user.last_name}"%>
-    </strong>
-  </p>
-  <p>
-    <% if @user.has_role?(:tutor) %>
-      Teaches:
-      <ul>
-        <% @user.taught_courses.each do |course|%>
-          <li><%= link_to "#{course.subject.name}", subject_path(course.subject.id)%></li> 
+    <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
+      <h3>Name: </h3>
+      <p>
+        <strong>
+          <%= "#{@user.first_name} #{@user.last_name}"%>
+        </strong>
+      </p>
+      <p>
+        <% if @user.has_role?(:tutor) %>
+          Teaches:
+          <ul>
+            <% @user.taught_courses.each do |course|%>
+              <li><%= link_to "#{course.subject.name}", subject_path(course.subject.id)%></li> 
+            <% end %>
+          </ul>
         <% end %>
-      </ul>
-    <% end %>
-    <% if @user.has_role?(:student)%>
-      Studies:
-      <ul>
-        <% @user.user_subjects.each do |studies| %>
-          <li> <%= link_to "#{studies.subject.name}", subject_path(studies.subject.id) %> </li>
+        <% if @user.has_role?(:student)%>
+          Studies:
+          <ul>
+            <% @user.user_subjects.each do |studies| %>
+              <li> <%= link_to "#{studies.subject.name}", subject_path(studies.subject.id) %> </li>
+            <% end %>
+          </ul>
         <% end %>
-      </ul>
-    <% end %>
-  </p>
-  <h3> 
-    Bio:
-  </h3>
-  <p> 
-    <%=@user.about_me %>
-  </p>
-</section>
-<section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
-  <% if current_user.has_role?(:tutor) %>
-    <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
-    <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
-  <% elsif current_user.has_role?(:student) %>
-    <%= link_to 'View Orders', order_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
-    <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
-  <% end %>
-  <% if policy(@user).update? || current_user.id == @user.id %>
-    <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
-  <% end %>
-  <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
-</section>
+      </p>
+      <h3> 
+        Bio:
+      </h3>
+      <p> 
+        <%=@user.about_me %>
+      </p>
+    </section>
+    <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
+      <% if current_user.has_role?(:tutor) %>
+        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
+        <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
+      <% elsif current_user.has_role?(:student) %>
+        <%= link_to 'View Orders', orders_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
+        <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
+      <% end %>
+      <% if policy(@user).update? || current_user.id == @user.id %>
+        <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
+      <% end %>
+      <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
+    </section>
+  </div>
+</div>

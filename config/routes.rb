@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/cancel', to: 'orders#cancel', as: 'cancel'
   get '/add_to_order/:id', to: 'orders#add_to_order', as: 'add_to_order'
   get '/shopping_cart', to: 'orders#shopping_cart', as: 'shopping_cart'
-  get '/order/:student_id', to: 'orders#show', as: 'order'
+  get '/order/:student_id', to: 'orders#index', as: 'orders'
   get '/courses/new', to: 'courses#new', as: 'new_course'
   post '/courses', to: 'courses#create'
   patch '/course/:id', to: 'courses#update'

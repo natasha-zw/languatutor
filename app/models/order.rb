@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
+  attr_accessor :skip_validations
   # validation
-  validate :check_for_existing_order
+
+  validate :check_for_existing_order, unless: :skip_validations
 
   # relations
   belongs_to :student, class_name: 'User'
