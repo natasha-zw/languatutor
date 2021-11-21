@@ -1,15 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1><%=" #{@user.full_name} Courses "%></h1>
+
 <% @user.taught_courses.each do |course| %>
-  <div class="card" style="width: 25rem;">
+  <div class="card" style="max-width: 25rem;">
     <div class="card-body">
       <p>
         <strong>Course Level:</strong>
         <%= course.name %>
-      </p>
-
-      <p>
-        <strong>Tutor:</strong>
-        <%= course.tutor.full_name %>
       </p>
 
       <p>

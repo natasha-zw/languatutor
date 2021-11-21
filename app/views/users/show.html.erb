@@ -40,9 +40,9 @@
     </section>
     <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
       <% if current_user.has_role?(:tutor) %>
-        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
         <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
       <% elsif current_user.has_role?(:student) %>
+        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
         <%= link_to 'View Orders', orders_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
         <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
