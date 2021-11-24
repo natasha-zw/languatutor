@@ -24,7 +24,7 @@
       </p>
       <% if current_user.id == course.tutor_id || policy(@user).update? %>
         <%= link_to 'Edit', edit_course_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary text-decoration-none"  %> 
       <% elsif current_user.has_any_role?(:student, :admin) %>
         <%= link_to 'Add to cart', add_to_order_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>

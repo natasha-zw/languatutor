@@ -17,7 +17,12 @@
   <div class="field">
     <%= form.label :name, "Level" %>
     <br/>
-    <%= form.collection_radio_buttons :name,  @courses, :id, :name%>
+    <%= form.radio_button(:name, "Beginner")%>
+    <%= form.label :name, "Beginner" %>
+    <%= form.radio_button(:name, "Intermediate")%>
+    <%= form.label :name, "Intermediate" %>
+    <%= form.radio_button(:name, "Advanced")%>
+    <%= form.label :name, "Advanced" %>
   </div>
   <div class="field">
     <%= form.label :subject_id, "Subject" %>
