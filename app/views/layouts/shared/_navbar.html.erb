@@ -19,9 +19,11 @@
           <li class="nav-item">
             <%= link_to 'My Profile', user_path(current_user), class: "nav-link active"%>
           </li>
-          <li class="nav-item">
-            <%= link_to 'Admin Dashboard', admin_path, class: "nav-link active"%>
-          </li>
+          <% if current_user.has_role?(:admin)%>
+            <li class="nav-item">
+              <%= link_to 'Admin Dashboard', rails_admin_path, class: "nav-link active"%>
+            </li>
+          <% end %>
           <li class="nav-item">
             <% if current_user.has_any_role?(:student, :admin)%>
               <%= link_to 'Shopping cart', shopping_cart_path, class: "nav-link active"%>

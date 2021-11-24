@@ -36,6 +36,27 @@ class ApplicationPolicy
     create?
   end
 
+  def dashboard? 
+    user.has_role?(:admin)
+  end 
+  def export? 
+    user.has_role?(:admin)
+  end
+  
+  def history?
+    show?
+  end
+
+  def show_in_app?
+    show?
+  end
+
+  def export?
+    show?
+  end
+
+
+
   class Scope
     def initialize(user, scope)
       @user = user

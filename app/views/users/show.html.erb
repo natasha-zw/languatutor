@@ -39,25 +39,30 @@
       </p>
     </section>
     <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
-      <% if @user.has_role?(:tutor)%>
-        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
-      <% end %>
-      <% if current_user.id == @user.id %>
-        <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
-      <% elsif current_user.has_role?(:student) %>
-        <%= link_to 'View Orders', orders_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
-        <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
+      <% if policy(@user).update? || @user.has_role?(:tutor)%>
+        <% if @user.taught_courses.present? == true %>
+          <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
+        <% else %>
+          <%= "#{@user.full_name} currently has no courses" %>
+        <% end %>
       <% end %>
       <% if policy(@user).update? || current_user.id == @user.id %>
-        <% if @user.has_role?(:tutor)%>
+        <% if @user.has_role?(:tutor) && current_user.id == @user.id%>
           <%= link_to 'View Students', student_path, class: "btn btn-outline-primary text-decoration-none" %>
+          <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
         <% end %>
         <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
       <% end %>
       <% if policy(@user).update? %>
         <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
-      <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
     </section>
   </div>
 </div>
+<section>
+  <% if current_user.has_role?(:student) %>
+    <%= link_to 'View Orders', orders_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
+    <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
+  <% end %>
+  <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
+</section>

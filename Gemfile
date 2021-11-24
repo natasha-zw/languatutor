@@ -73,3 +73,5 @@ gem "stripe", "~> 5.40"
 gem "active_storage_validations", "~> 0.9.5"
 
 gem "aws-sdk-s3", require: false
+
+gem "rails_admin", "~> 2.2"

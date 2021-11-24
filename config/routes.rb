@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   root to: 'subjects#index'
-  get '/admin_dashboard', to: 'users#admin_dashboard', as: 'admin'
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get '/tutors', to: 'users#tutors_index', as: 'tutors'
   get '/students', to: 'users#students_index', as: 'students'
   get '/students/:id', to: 'users#students_show', as: 'student'
