@@ -3,10 +3,10 @@
 
 <h4> Pick a language below to start finding tutors </h3>
 
-<div class="row">
+<div class="row card-container">
     <% @subjects.each do |subject|%>
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card" id="subject-index-card">
                 <div class="card-body">
                     <%= link_to subject_path(subject.id), class: "card-link" do %>
                         <div class=" bd-highlight text-center m-2" style="width: 18rem; height: 5rem">

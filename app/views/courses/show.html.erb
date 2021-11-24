@@ -23,12 +23,15 @@
         <%= sprintf('$%2.f', course.price/100) %>
       </p>
       <% if current_user.id == course.tutor_id || policy(@user).update? %>
-        <%= link_to 'Edit', edit_course_path(course.id) %> 
-      <% else %>
-        <%= link_to 'Add to cart', add_to_order_path(course.id)%>
+        <%= link_to 'Edit', edit_course_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
+        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> 
+      <% elsif current_user.has_any_role?(:student, :admin) %>
+        <%= link_to 'Add to cart', add_to_order_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
     </div>
   </div>
 <% end %>
-<%= link_to 'View cart', shopping_cart_path%>
-<%= link_to 'Back', user_path(@course.tutor_id)%>
+<% if current_user.has_any_role?(:student, :admin) %>
+  <%= link_to 'View cart', shopping_cart_path,  class: "btn btn-outline-primary text-decoration-none" %>
+<% end %>
+<%= link_to 'Back', user_path(@course.tutor_id),  class: "btn btn-outline-primary text-decoration-none" %>

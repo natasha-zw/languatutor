@@ -1,0 +1,25 @@
+<%= form_with form_with(model: course)  do |form| %>
+    <div class="field">
+        <%= form.hidden_field :id, value: @user.id %>
+    </div>
+    <div class="field">
+        <%= form.label :level %>
+        <br/>
+        <%= form.collection_radio_buttons :course_ids, @courses, :id, :name%>
+    </div>
+    <div class="field">
+        <%= form.label :subject %>
+        <br/>
+        <%= form.collection_radio_buttons :course_ids, @subjects, :id, :name%>
+    </div>
+    <div class="field">
+        <%= form.label :subject %>
+        <br/>
+        <%= form.select :price, @prices%>
+    </div>
+
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+  
+<%end%>

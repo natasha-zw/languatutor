@@ -69,3 +69,5 @@ gem "activestorage-cloudinary-service", "~> 0.2.3"
 gem "dotenv-rails", "~> 2.7"
 
 gem "stripe", "~> 5.40"
+
+gem "active_storage_validations", "~> 0.9.5"

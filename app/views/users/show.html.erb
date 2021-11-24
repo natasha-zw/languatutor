@@ -39,15 +39,20 @@
       </p>
     </section>
     <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
-      <% if current_user.has_role?(:tutor) %>
+      <% if @user.has_role?(:tutor)%>
+        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
+      <% end %>
+      <% if current_user.id == @user.id %>
         <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
       <% elsif current_user.has_role?(:student) %>
-        <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
         <%= link_to 'View Orders', orders_path(current_user.id), class: "btn btn-outline-primary text-decoration-none" %>
         <%= link_to 'View Cart', shopping_cart_path, class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
       <% if policy(@user).update? || current_user.id == @user.id %>
         <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
+      <% end %>
+      <% if policy(@user).update? %>
+        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
       <%= link_to 'Back', tutors_path, class: "btn btn-outline-primary text-decoration-none"  %>
     </section>

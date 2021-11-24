@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       line_items: [line_item],
       mode: 'payment',
       # These placeholder URLs will be replaced in a following step.
-      success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
+      success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}", 
       cancel_url: cancel_url
     })
 
@@ -96,11 +96,13 @@ class OrdersController < ApplicationController
 
   def success
     @order.skip_validations = true
-    session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @order.courses.each do |course| 
+      UserCourse.create!(user_id: current_user.id, course_id: course.id)
+    end 
     @order.update(complete: true)
     respond_to do |format|
-      format.html { redirect_to @order, notice: "Your order was successful" }
-      format.json { render :show, status: :ok, location: @order }
+      format.html { redirect_to orders_path(current_user.id), notice: "Your order was successful" }
+      format.json { render :show, status: :ok, location: orders_path(current_user.id) }
     end 
   end 
 

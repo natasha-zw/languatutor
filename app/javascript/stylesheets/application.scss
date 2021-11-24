@@ -1,11 +1,25 @@
 @import "bootstrap";
+$enable-gradients: true; 
+$gradient: linear-gradient(180deg, rgba($red, .15), rgba($white, 0));
+
 * {
     padding: 0;
     margin: 0;
 }
 
-.app-body{
-    margin: 1px;
-    height: 100%;
-    background-image: var(--bs-gradient(#00d4ff, #090979,#020024 ));
+.background-body{
+    background: linear-gradient(to bottom, #c33764, #1d2671);
 }
+
+.card-container{
+    display: flex ;
+    flex-flow: row wrap;
+    max-width: max-content;
+}
+
+#subject-index-card {
+    border: black solid 1px ;
+    margin: 1rem 0;
+    max-width: 15rem;
+}
+

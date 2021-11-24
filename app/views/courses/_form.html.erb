@@ -17,7 +17,7 @@
   <div class="field">
     <%= form.label :name, "Level" %>
     <br/>
-    <%= form.collection_radio_buttons :name, @courses, :name, :name%>
+    <%= form.collection_radio_buttons :name,  @courses, :id, :name%>
   </div>
   <div class="field">
     <%= form.label :subject_id, "Subject" %>
@@ -33,6 +33,10 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
+  </div>
+  <div class="field">
+    <%= form.label :course_file, "Upload a resource" %>
+    <%= form.file_field :course_file%>
   </div>
 
   <div class="actions">
