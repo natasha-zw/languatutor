@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tutors</h1>
+
 <% @users.each do |user| %>
-  <% if user.has_role?(:tutor) && user.taught_courses.any? %>
     <div class="d-sm-flex flex-wrap bd-highlight mb-3 card ">
       <div class="p-2 flex-fill bd-highlight card-body text-center">
         <%= cl_image_tag user.profile_photo.key, crop: :scale, width: 100, cloud_name: 'natasha-zw' if user.profile_photo.attached? %>
@@ -14,16 +13,12 @@
             <%= "#{course.subject.name} "%> 
           <% end %>
         </p>
-        <p>
-          <%= user.about_me %>
-        </p>
         <section> 
-          <%= link_to 'Tutor Profile', user_path(user.id)%>
+          <%= link_to 'Profile', user_path(user.id), class: "btn btn-outline-primary text-decoration-none"%>
         </section>
       
       </div>
     </div>
-  <% end %>
 <% end %>
 
 

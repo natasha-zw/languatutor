@@ -21,8 +21,7 @@ class User < ApplicationRecord
   has_many :user_subjects
   has_many :subjects, through: :user_subjects
 
-  # accepts_nested_attributes_for :subjects, :subject_roles
-  
+  # custom methods  
 
   def full_name 
     return "#{first_name} #{last_name}" 
@@ -34,6 +33,10 @@ class User < ApplicationRecord
 
   def completed_orders
     return Order.where(student_id: id, complete: true)
+  end 
+
+  def students
+    return User.where()
   end 
 
 end

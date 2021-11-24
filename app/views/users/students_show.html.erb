@@ -1,0 +1,16 @@
+<h1><%= "#{@user.full_name}'s students"%></h1>
+<% @students.each do |student|%>
+<div class="card mx-auto shadow-lg p-3 mb-5 bg-body rounded" style="min-width: 20rem; max-width: 35rem;">
+    <div class="card-content">
+        <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;"> 
+            <%= student.full_name %>
+            <%= link_to 'View Profile', user_path(student.id), class: "btn btn-outline-primary text-decoration-none"%>
+        </section>
+    </div>
+</div>
+<% end %>
+
+<section>
+    <%= link_to 'Back', user_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
+
+</section>

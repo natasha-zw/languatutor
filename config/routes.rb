@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   root to: 'subjects#index'
-  get '/test', to: 'subjects#test'
-  get '/tutors', to: 'users#index', as: 'tutors'
+  get '/admin_dashboard', to: 'users#admin_dashboard', as: 'admin'
+  get '/tutors', to: 'users#tutors_index', as: 'tutors'
+  get '/students', to: 'users#students_index', as: 'students'
+  get '/students/:id', to: 'users#students_show', as: 'student'
   get '/course/:tutor_id', to: 'courses#show', as: 'course'
   get '/course/:id/edit', to: 'courses#edit', as: 'edit_course'
   get '/subject/:id', to: 'subjects#show', as: 'subject'

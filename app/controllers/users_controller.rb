@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy students_show]
   before_action :set_roles, only: %i[ new edit create update ]
   before_action :set_subjects, only: %i[ new edit create update]
   before_action :authenticate_user!, except: %i[index]
@@ -7,6 +7,31 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+
+  def tutors_index
+    @users = User.with_role(:tutor)
+  end 
+
+  def students_index
+    @users = User.with_role(:student)
+  end 
+
+  def students_show
+    @users = User.with_role(:student)
+    @students = []
+    @users.each do |student|
+      student.studied_courses.each do |course|
+        if course.tutor_id == @user.id
+          @students << student
+        end 
+      end
+    end 
+  end 
+
+  def admin_dashboard
+    @students = User.with_role(:student)
+    @tutors = User.with_role(:tutor)
+  end 
 
   # GET /users/1 or /users/1.json
   def show
