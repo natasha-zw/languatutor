@@ -55,7 +55,7 @@ class CoursesController < ApplicationController
   def destroy
     Course.find(params[:id]).destroy
     respond_to do |format|
-      format.html { redirect_to course_path(@course.tutor.id), notice: "Course was successfully removed." }
+      format.html { redirect_to user_path(current_user.id), notice: "Course was successfully removed." }
       format.json { head :no_content }
     end
   end
@@ -75,6 +75,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price)
+    params.require(:course).permit(:name, :tutor_id, :subject_id, :description, :price, :course_file)
   end
 end
