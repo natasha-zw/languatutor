@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :user_courses, dependent: :destroy
   has_many :studied_courses, through: :user_courses, source: :course
   has_many :orders, class_name: 'Order', foreign_key: :student_id
-  has_one_attached :profile_photo, dependent: :purge_later
+  has_one_attached :profile_photo, service: :cloudinary, dependent: :purge_later
   has_many :user_subjects
   has_many :subjects, through: :user_subjects
 
