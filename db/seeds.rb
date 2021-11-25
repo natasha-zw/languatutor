@@ -32,8 +32,16 @@ tutors.each do |tutor|
     tutor.add_role(:tutor)
 end 
 
-student.first.profile_photo.attach(io: File.open('./public/pr
-  ofile_images/student_1.jpg'), filename: 'student_1.jpg')
+student.first.profile_photo.attach(io: File.open('./public/profile_images/student_1.jpg'), filename: 'student_1.jpg')
+student.find(2).profile_photo.attach(io: File.open('./public/profile_images/student_2.jpg'), filename: 'student_2.jpg')
+student.find(3).profile_photo.attach(io: File.open('./public/profile_images/student_3.jpg'), filename: 'student_3.jpg')
+student.find(4).profile_photo.attach(io: File.open('./public/profile_images/student_4.jpg'), filename: 'student_4.jpg')
+student.find(5).profile_photo.attach(io: File.open('./public/profile_images/student_5.jpg'), filename: 'student_5.jpg')
+student.find(6).profile_photo.attach(io: File.open('./public/profile_images/student_6.jpg'), filename: 'student_6.jpg')
+student.find(7).profile_photo.attach(io: File.open('./public/profile_images/student_7.jpg'), filename: 'student_7.jpg')
+student.find(8).profile_photo.attach(io: File.open('./public/profile_images/student_8.jpg'), filename: 'student_8.jpg')
+student.find(9).profile_photo.attach(io: File.open('./public/profile_images/student_9.jpg'), filename: 'student_9.jpg')
+student.find(10).profile_photo.attach(io: File.open('./public/profile_images/student_10.jpg'), filename: 'student_10.jpg')
 
 Course.create([
                 {name: 'Beginner', description: 'Beginner level course for subject', price: 2000, subject_id: Subject.first.id, tutor_id: tutors.first.id },
