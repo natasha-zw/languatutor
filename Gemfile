@@ -75,3 +75,5 @@ gem "active_storage_validations", "~> 0.9.5"
 gem "aws-sdk-s3", require: false
 
 gem "rails_admin", "~> 2.2"
+
+gem "mailboxer", "~> 0.15.1"

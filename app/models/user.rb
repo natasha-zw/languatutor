@@ -10,7 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
+  acts_as_messageable
 
   # relations
   has_many :taught_courses, class_name: 'Course', foreign_key: :tutor_id, dependent: :destroy
@@ -21,22 +21,25 @@ class User < ApplicationRecord
   has_many :user_subjects
   has_many :subjects, through: :user_subjects
 
-  # custom methods  
-
+  # custom methods 
   def full_name 
-    return "#{first_name} #{last_name}" 
+    "#{first_name} #{last_name}"
   end
 
   def order
-    return Order.find_by(student_id: id, complete: false) || Order.create(student_id: id, complete: false)
+    Order.find_by(student_id: id, complete: false) || Order.create(student_id: id, complete: false)
   end
 
   def completed_orders
-    return Order.where(student_id: id, complete: true)
-  end 
+    Order.where(student_id: id, complete: true)
+  end
 
   def students
-    return User.where()
-  end 
+    User.where()
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
 
 end

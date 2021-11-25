@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
+  resources :conversations do
+    resources :messages
+  end
   root to: 'subjects#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get '/tutors', to: 'users#tutors_index', as: 'tutors'

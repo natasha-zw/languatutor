@@ -40,6 +40,7 @@
     </section>
     <section class="mx-auto" style="min-width: 15rem; max-width: 25rem;">
       <% if policy(@user).update? || @user.has_role?(:tutor)%>
+        <%= link_to 'Message Me!' %>
         <% if @user.taught_courses.present? == true %>
           <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
         <% else %>
@@ -52,6 +53,7 @@
           <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
         <% end %>
         <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
+        <%= link_to 'My Messages', conversations_path, class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
       <% if policy(@user).update? %>
         <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary text-decoration-none" %>
