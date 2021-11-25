@@ -25,11 +25,11 @@
      
       <% if current_user.id == course.tutor_id || policy(@user).update? %>
         <%= link_to 'Edit', edit_course_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary text-decoration-none"  %> 
+        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger text-decoration-none"  %> 
       <% end %>
       <% if current_user.studied_courses.include?(course) || current_user.id == course.tutor_id %>
           <% if course.course_file.attached? %>
-            <%= link_to 'Course material', course.course_file_url, class: "btn btn-outline-primary text-decoration-none"%>
+            <%= link_to 'Course material', course.course_file_url, class: "btn btn-outline-success text-decoration-none"%>
           <% else %>
             <p>No file attached</p>
           <% end %>
