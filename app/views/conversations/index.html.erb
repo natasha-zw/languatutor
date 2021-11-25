@@ -1,5 +1,13 @@
 <h1>All Conversations</h1>
 
-<% @conversations.each do |conversation|%>
-    <%= link_to conversation.subject, conversation_path(conversation) %>
-<% end %>
+<section class="d-grid gap-1">
+    <% @conversations.each do |conversation|%>
+        <div class="p-2 mb-3 bg-light border" style="max-width: 15rem;">
+        <%= link_to conversation.subject, conversation_path(conversation), class: " m-3 text-decoration-none" %>
+        </div>
+    <% end %>
+</section>
+
+<section>
+    <%= link_to "Back to Profile", user_path(current_user.id), class: "btn btn-outline-primary text-decoration-none"%>
+</section>

@@ -1,2 +1,19 @@
-<h1>Conversations#new</h1>
-<p>Find me in app/views/conversations/new.html.erb</p>
+<h1>Start a new conversation</h1>
+
+<%= form_with url: conversations_path, method: :post do |f| %>
+    <div class="field">
+        <%= f.hidden_field :user_id, value: @recipient.id %>
+    </div>
+    <div class="field">  
+        <%= f.text_field :subject, placeholder: "Subject" %>
+    </div>
+    <div class="field">  
+        <%= f.text_area :body, placeholder: "Write a message", size: "40x5" %>
+    </div>
+    <%= f.submit "Send", class: "btn btn-outline-primary text-decoration-none"%>
+<% end %>
+
+<section>
+    <%= link_to "Back", user_path(@recipient.id), class: "btn btn-outline-primary text-decoration-none"%>
+</section>
+

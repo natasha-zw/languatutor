@@ -1,18 +1,21 @@
 <h1><%= @conversation.subject%></h1>
 
-<section>
-    <% @conversation.receipts_for(current_user).each do |receipt|%>
-        <%= "#{receipt.message.sender.full_name} sent: "%>
-        <%=  receipt.message.body%>
-        <br>
-    <% end %>
+<section class="card" style="max-width: 25rem;">
+    <div class="card-body">
+        <% @conversation.receipts_for(current_user).each do |receipt|%>
+            <%= "#{receipt.message.sender.full_name} sent: "%>
+            <%=  receipt.message.body%>
+            <br>
+        <% end %>
+    </div>
 </section>
 
 <section>
     <%= form_with url: conversation_messages_path(@conversation), method: :post do |f| %>
-        <div>   
-            <%= f.text_area :body %>
+        <div class="mb-3 mt-3" style="max-width: 25rem;">  
+            <%= f.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", rows: "3" %>
         </div>
-        <%= f.submit "send"%>
+        <%= f.submit "Send", class: "btn btn-outline-primary text-decoration-none"%>
     <% end %>
 </section>
+<%= link_to "Back to conversations", conversations_path, class: "btn btn-outline-primary text-decoration-none"%>

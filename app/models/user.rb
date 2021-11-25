@@ -3,7 +3,6 @@ class User < ApplicationRecord
   validates :first_name, presence: { message: 'Please provide a first name' }
   validates :last_name, presence: { message: 'Please provide a last name' }
   validates :roles, presence: { message: 'Please pick how you will use the website!' }
-  validates :profile_photo, attached: true, content_type: [:png, :jpg, :jpeg]
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
