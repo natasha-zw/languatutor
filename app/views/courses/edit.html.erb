@@ -2,5 +2,4 @@
 
 <%= render 'form', course: @course %>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', course_path(@course.tutor.id) %>
+<%= link_to 'Back', course_path(@course.tutor.id), class: "btn btn-outline-primary text-decoration-none" %>
