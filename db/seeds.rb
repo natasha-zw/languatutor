@@ -72,14 +72,17 @@ tutors.at(9).profile_photo.attach(io: File.open('./public/profile_images/tutor_1
 
 # Courses 
 Course.create([
-                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(0).id, tutor_id: tutors.first.id },
-                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(1).id, tutor_id: tutors.second.id },
-                {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(2).id, tutor_id: tutors.third.id },
-                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(3).id, tutor_id: tutors.first.id },
-                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(4).id, tutor_id: tutors.at(3).id },
-                {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(5).id, tutor_id: tutors.at(4).id },
-                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(6).id, tutor_id: tutors.at(4).id },
-                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(7).id, tutor_id: tutors.at(5).id },
+                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(0).id, tutor_id: tutors.at(0).id },
+                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(1).id, tutor_id: tutors.at(1).id },
+                {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(2).id, tutor_id: tutors.at(4).id },
+                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(3).id, tutor_id: tutors.at(2).id },
+                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(4).id, tutor_id: tutors.at(6).id },
+                {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(5).id, tutor_id: tutors.at(3).id },
+                {name: 'Beginner', description: 'Beginner level course', price: 2000, subject_id: subjects.at(6).id, tutor_id: tutors.at(2).id },
+                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(7).id, tutor_id: tutors.at(8).id },
                 {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(7).id, tutor_id: tutors.at(6).id },
+                {name: 'Advanced', description: 'Advanced level course', price: 4000, subject_id: subjects.at(8).id, tutor_id: tutors.at(0).id },
+                {name: 'Intermediate', description: 'Intermediate level course', price: 3000, subject_id: subjects.at(9).id, tutor_id: tutors.at(9).id },
+
 
 ])
