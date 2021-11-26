@@ -34,6 +34,11 @@
             <p>No file attached</p>
           <% end %>
       <% elsif current_user.has_any_role?(:student, :admin) %>
+        <% if course.course_file.attached? %>
+          <p> Course Material attached </p>
+        <% else %>
+          <p> No course material attached </p>
+        <% end %>
         <%= link_to 'Add to cart', add_to_order_path(course.id), class: "btn btn-outline-primary text-decoration-none" %>
       <% end %>
     </div>
