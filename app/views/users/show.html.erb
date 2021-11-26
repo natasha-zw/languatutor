@@ -45,21 +45,25 @@
         <%if current_user.has_any_role?(:student, :admin)%>
           <%= link_to 'Message Me!', new_conversation_path(id: @user.id), class: "btn btn-outline-primary text-decoration-none" %>
         <% end %>
-        <% if @user.taught_courses.present? == true %>
+        <% if @user.has_role?(:admin)%>
+          <p>Admin account </p>
+        <% elsif @user.taught_courses.present? == true %>
           <%= link_to "Click here for a list of #{@user.first_name}'s courses", course_path(@user), class: "btn btn-outline-primary text-decoration-none" %>
         <% else %>
-          <%= "#{@user.full_name} currently has no courses" %>
+          <p>
+            <%= "#{@user.full_name} currently has no courses" %>
+          </p>
         <% end %>
       <% end %>
-      <% if policy(@user).update? || current_user.id == @user.id %>
+      <% if current_user.id == @user.id %>
         <% if @user.has_role?(:tutor) && current_user.id == @user.id%>
           <%= link_to 'View Students', student_path, class: "btn btn-outline-primary text-decoration-none" %>
           <%= link_to 'Add Courses', new_course_path, class: "btn btn-outline-primary text-decoration-none"%>
         <% end %>
         <%= link_to 'My Messages', conversations_path, class: "btn btn-outline-primary text-decoration-none" %>
-        <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
       <% end %>
       <% if policy(@user).update? %>
+        <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-outline-primary text-decoration-none" %> 
         <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger text-decoration-none" %>
       <% end %>
     </section>
