@@ -3,7 +3,7 @@ class Course < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: { messsage: 'Please add a description of the course' }
   validates :price, presence: { messsage: 'Please add the price of the course' }
-  validates :course_file, attached: { messsage: 'Please add resources to your course in pdf format' }, content_type: [:pdf]
+
 
   # relations
   belongs_to :tutor, class_name: 'User'
