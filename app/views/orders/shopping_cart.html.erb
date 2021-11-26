@@ -38,5 +38,7 @@
 
 <% if @course_orders.any?%>
   <%= link_to 'Checkout', buy_path, class: "btn btn-outline-success text-decoration-none" %>
+<%else%>
+  <%= link_to 'Browse tutors', tutors_path, class: "btn btn-outline-success text-decoration-none" %>
 <% end  %>
 <%= link_to 'My Profile', user_path(current_user.id), class: "btn btn-outline-primary text-decoration-none"%>

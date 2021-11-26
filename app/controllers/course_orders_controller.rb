@@ -12,7 +12,7 @@ class CourseOrdersController < ApplicationController
   def destroy
     @order_item.delete
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order item was successfully removed.' }
+      format.html { redirect_to user_path(current_user.id), notice: 'Order item was successfully removed.' }
       format.json { head :no_content }
     end
   end
