@@ -108,7 +108,7 @@ class OrdersController < ApplicationController
 
   def cancel
     respond_to do |format|
-      format.html { redirect_to user_path(current_user.id), notice: "Your order was cancelled!" }
+      format.html { redirect_to shopping_cart_path, notice: "Your order was cancelled!" }
       format.json { render :show, status: :ok, location: current_user }
     end
   end 
