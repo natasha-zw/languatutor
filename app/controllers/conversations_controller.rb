@@ -6,6 +6,11 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = current_user.mailbox.conversations.find(params[:id])
+    @conversation.participants.each do |user|
+      if user.id != current_user.id
+        @recipient = user
+      end
+    end
   end
 
   def new
